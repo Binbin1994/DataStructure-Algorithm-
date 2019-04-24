@@ -50,13 +50,14 @@ public class SingleList {
 		}
 	}
 
-	public void delete(int data) {
+	public boolean delete(int data) {
 		Node node = head;
 		if (node.getData() == data) {
 			head = head.next;
 			--size;
-			return;
+			return true;
 		}
+		node=node.next;
 		while (node != null) {
 			if (node.getData() == data) {
 				Node preNode = findPreNode(node);
@@ -64,13 +65,14 @@ public class SingleList {
 					preNode.next = preNode.next.next;
 					--size;
 					tail = preNode;
-					return;
+					return true;
 				}
 				--size;
 				preNode.next = preNode.next.next;
 			}
 			node = node.next;
 		}
+		return false;
 	}
 
 	public SingleList mergeLinkedList(SingleList list1, SingleList list2) {
