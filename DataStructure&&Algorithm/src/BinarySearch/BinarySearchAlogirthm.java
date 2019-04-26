@@ -2,6 +2,9 @@ package BinarySearch;
 
 import java.text.DecimalFormat;
 
+/*
+ * author: Hongbin Deng
+ */
 public class BinarySearchAlogirthm {
 	
 	private int[] a=new int[] {1,2,3,4,5,6};

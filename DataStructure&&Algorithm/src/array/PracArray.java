@@ -1,5 +1,8 @@
 package array;
 
+/*
+ * author: Hongbin Deng
+ */
 public class PracArray {
 	private int size;
 	private int capacity;

@@ -2,6 +2,9 @@ package HashTable;
 
 import LinkedList.SingleList;
 /*
+ * author: Hongbin Deng
+ */
+/*
  * Example of implementing hashtable based on combination of array and linkedlist,
    The following example is not generic, and it only suits for integers
  */
@@ -20,6 +23,38 @@ public class HashLinkedList {
 		this.capacity=capacity;
 		bucket=new SingleList[capacity];
 	}
+	
+	public void put(String key,int value) {
+		
+		int hash=hashcodeGeneric(key);
+		if(size>=capacity) {
+			int newCapacity=capacity<<1;
+			SingleList[] newBucket=new SingleList[newCapacity];
+			for(int i=0;i<bucket.length;i++) {
+				newBucket[i]=bucket[i];
+			}
+			this.bucket=newBucket;
+			this.capacity=newCapacity;
+		}
+
+		if(bucket[hash]==null) {
+			bucket[hash]=new SingleList();
+			++size;
+		}	
+		bucket[hash].add(value);	
+			
+	}
+	
+	public void get(String key) {
+		int hash=hashcodeGeneric(key);
+		if(key==null) return;
+		if(bucket[hash]==null) return; 
+		if(bucket[hash].getSize()==1) {
+			bucket[hash].print();
+		}
+	}
+	
+	
 	
 	public void add(int element) {
 		int hash=hashcode(element);
@@ -48,6 +83,7 @@ public class HashLinkedList {
 		int hash=hashcode(element);
 		if(!bucket[hash].delete(element)) {
 			System.out.println("element "+element+" not found");
+			return;
 		}		
 	    if(bucket[hash].getSize()==0) {
 	    	bucket[hash]=null;
@@ -101,22 +137,28 @@ public class HashLinkedList {
 	 * 
 	 * The implementation of hashcode algorithm for generic
 	 */
-//	private int hashcodeGeneric(Object element) {
-//		return element.hashCode()^(element.hashCode()>>16)%capacity;
-//	}
+	private int hashcodeGeneric(Object element) {
+		//System.out.println((element.hashCode())^((element.hashCode())>>>16));
+		return ((element.hashCode())^((element.hashCode())>>16))%capacity;
+	}
 	
 	
 	
 	
 	public static void main(String[] args) {
 		HashLinkedList linekedHash=new HashLinkedList();
-		linekedHash.add(1);
-		linekedHash.add(11);
-		linekedHash.delete(11);
-		linekedHash.add(2);
-		linekedHash.add(12);
-		linekedHash.ToString(1);
-		linekedHash.ToString(2);
-		System.out.println(linekedHash.containsKey(1));	
+//		linekedHash.add(1);
+//		linekedHash.add(11);
+//		linekedHash.delete(11);
+//		linekedHash.add(2);
+//		linekedHash.add(12);
+//		linekedHash.ToString(1);
+//		linekedHash.ToString(2);
+		linekedHash.put("sd", 1);
+		linekedHash.put("sdasfas", 1);
+		linekedHash.put("sdfafa", 1);
+		linekedHash.put("sfasfagfd", 1);
+		linekedHash.get("sd");
+		//System.out.println(linekedHash.containsKey(1));	
 	}
 }
