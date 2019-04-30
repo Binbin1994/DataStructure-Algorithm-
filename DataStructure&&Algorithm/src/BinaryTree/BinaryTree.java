@@ -1,6 +1,11 @@
 package BinaryTree;
 
+import java.util.ArrayList;
+/*
+ * author: Hongbin Deng
+ */
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Queue;
 
 public class BinaryTree {
@@ -137,15 +142,78 @@ public class BinaryTree {
 
 	}
 
-	public void middleOrderPrint(Node node) {
+	public int getMaxHeight(Node node) {
+		if (node == null) {
+			return 0;
+		}
+		return Math.min(getMaxHeight(node.left), getMaxHeight(node.right)) + 1;
+	}
+
+	public void middleOrderPrint(Node node,List<Integer> list) {
 
 		if (node == null) {
 			return;
 		}
 
-		middleOrderPrint(node.left);
+		middleOrderPrint(node.left,list);
+		list.add(node.getData());
 		System.out.println(node.getData());
-		middleOrderPrint(node.right);
+		middleOrderPrint(node.right,list);
+	}
+
+	public void callPath(int value) {
+		List<Integer> list = new ArrayList<>();
+		list.add(root.getData());
+		List<List<Integer>> listTwo = new ArrayList<>();
+		boolean found = false;
+		binaryTreePath(root.getData(), root, value, list, listTwo, found);
+		System.out.println(listTwo.size());
+		if (listTwo.size() == 0) {
+			System.out.println("there is no path for this sum");
+		} else {
+			for (List<Integer> item : listTwo) {
+				System.out.println(item);
+			}
+		}
+
+	}
+
+	public void binaryTreePath(int element, Node node, int sum, List<Integer> list, List<List<Integer>> listTwo,
+			boolean found) {
+
+		if (node.left == null && node.right == null) {
+			if (element == sum) {
+				List<Integer> temp=new ArrayList();
+				for(Integer item:list) {
+					temp.add(item);
+				}
+				listTwo.add(temp);
+				return;
+			}
+			return;
+		}
+		if (element == sum) {
+			List<Integer> temp=new ArrayList();
+			for(Integer item:list) {
+				temp.add(item);
+			}
+			listTwo.add(temp);
+			found = true;
+			return;
+		}
+		if (node.left != null) {
+			list.add(node.left.getData());
+			binaryTreePath(element + node.left.getData(), node.left, sum, list, listTwo, found);
+			list.remove(list.size() - 1);
+
+		}
+		if (node.right != null) {
+			list.add(node.right.getData());
+			binaryTreePath(element + node.right.getData(), node.right, sum, list, listTwo, found);
+			list.remove(list.size() - 1);
+
+		}
+
 	}
 
 	public void lastOrderPrint(Node node) {
@@ -193,10 +261,18 @@ public class BinaryTree {
 		tree.add(140);
 		tree.add(88);
 		tree.add(92);
-		tree.delete(78);
-		tree.middleOrderPrint(tree.root);
-		System.out.println("the height of tree is " + tree.getHeight());
-		System.out.println(System.currentTimeMillis());
+		tree.add(18);
+		//get sorted list in log(n) time
+		List<Integer> list=new ArrayList<>();	
+		// tree.delete(78);
+		tree.middleOrderPrint(tree.root,list);		 
+		for(Integer number:list) {
+			 System.out.println(number);
+		 }
+//		System.out.println("the height of tree is " + tree.getHeight());
+//		System.out.println(tree.getMaxHeight(tree.root));
+//		System.out.println(System.currentTimeMillis());
+		tree.callPath(228);
 		// tree.preOrderPrint(tree.root);
 	}
 
