@@ -9,7 +9,6 @@ import LinkedList.SingleList;
    The following example is not generic, and it only suits for integers
  */
 public class HashLinkedList {
-	private SingleList linkedlist;
 	private SingleList[] bucket;
 	//private int default_capacity=10;
 	private int capacity;
