@@ -1,6 +1,6 @@
 package recursion;
 
-public class TestRecursion {
+public class Recursion {
 	
 	public int f(int n) {
 		if(n==1) return 1;
@@ -39,7 +39,7 @@ public class TestRecursion {
 	
 
 	public static void main(String[] args) {
-		TestRecursion t=new TestRecursion();
+		Recursion t=new Recursion();
 //		System.out.println(t.f(5));
 //		System.out.println(t.fm(5));
 		char[] a=new char[] {'a','b','c','d'};

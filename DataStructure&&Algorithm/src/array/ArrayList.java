@@ -3,13 +3,13 @@ package array;
 /*
  * author: Hongbin Deng
  */
-public class PracArray {
+public class ArrayList {
 	private int size;
 	private int capacity;
 	private int head=0;
 	private int tail=0;
 	private int[] items;
-	public PracArray(int capacity) {
+	public ArrayList(int capacity) {
 		this.capacity=capacity;
 		items=new int[capacity];
 	}
@@ -69,6 +69,22 @@ public class PracArray {
 	}
 	
 	
+	public int getByindex(int index) {
+		if(index>=tail) {
+			return -1;
+		}
+		return items[index];
+		
+	}
+	
+	public int peek() {
+		if(head==tail) {
+			return -1;
+		}
+		return items[head];
+	}
+	
+	
 	public int getSize() {
 		System.out.println("size is");
 		System.out.println(items.length);
@@ -124,14 +140,19 @@ public class PracArray {
 	}
 		
 	public static void main(String[] args) {
-		PracArray array=new PracArray(10);
-	    int[] temp=new int[] {
-	       4,6,8,10
-	    };
-	    int[] temp1=new int[] {
-	 	       5,7,9,11
-	 	    };
-	    array.mergeArray(temp, temp1);	
+		ArrayList array=new ArrayList(10);
+//	    int[] temp=new int[] {
+//	       4,6,8,10
+//	    };
+//	    int[] temp1=new int[] {
+//	 	       5,7,9,11
+//	 	    };
+//	    array.mergeArray(temp, temp1);	
+		array.add(12);
+		array.add(10);
+		array.add(8);
+		System.out.println(array.getByindex(2));
+		System.out.println(array.peek());
 	}
 	
 }

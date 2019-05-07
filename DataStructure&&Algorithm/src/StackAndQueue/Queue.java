@@ -59,6 +59,11 @@ public class Queue {
 		}
 	}
 	
+	
+	public boolean isEmpty() {
+		return size>0?false:true;
+	}
+	
 	public static void main(String[] args) {
 		
 		Queue queue=new Queue(3);
@@ -70,8 +75,5 @@ public class Queue {
 		queue.print();
 		
 	}
-	
-	
-	
 
 }

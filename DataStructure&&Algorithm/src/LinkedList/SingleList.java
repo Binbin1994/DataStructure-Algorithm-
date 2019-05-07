@@ -10,8 +10,27 @@ public class SingleList {
 	}
 
 	public int getSize() {
-		System.out.println("size is " + size);
 		return size;
+	}
+	
+	public Node getByIndex(int index) {
+		if(head==null) {
+			return null;
+		}
+		
+		if(index==0) {
+			return getHead();
+		}
+		Node node=head.next;
+		int count=1;
+		while(node!=null) {
+			if(index==count) {
+				return node;
+			}
+			++count;
+			node=node.next;
+		}
+		return null;
 	}
 
 	public void add(int data) {
@@ -117,42 +136,6 @@ public class SingleList {
 		return null;
 	}
 
-//	public void sorting() {
-//		Node node = head;
-//		System.out.println("size is "+size);
-//		for (int i = 0; i < size; i++) {
-//			for (int j = 0; j < size - i; j++) {
-//				Node next=node.next;
-//				if (node == head) {
-//					
-//					if (node.getData() > node.next.getData()) {
-//						node.next = node.next.next;
-//						node.next.next = node;
-//						head = next;
-//						node = next;
-//					}
-//					else {
-//						System.out.println("running");
-//						if(i==0) {head=node;}
-//						continue;
-//					}
-//					
-//				} else {
-//					if (node.getData() > node.next.getData()) {
-//						node.next = node.next.next;
-//						node.next.next = node;
-//						node = next;
-//					}
-//					else {
-//						continue;
-//					}
-//					
-//				}
-//			}
-//
-//		}
-//
-//	}
 
 	public void print() {
 		Node node = head;
